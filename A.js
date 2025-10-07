@@ -7,3 +7,4 @@ const cafes = [
 ];
 
 console.log(cafes);
+
