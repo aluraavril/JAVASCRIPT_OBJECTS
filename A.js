@@ -1,3 +1,5 @@
+// Make an array containing at least 5 JavaScript objects.
+
 const cafes = [
   { name: "8shots Cafe", location: "Makati", rating: 4.6 },
   { name: "Starbucks", location: "Taguig", rating: 4.8 },
