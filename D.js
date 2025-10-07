@@ -1,3 +1,5 @@
+// Use the same array and demonstrate a sample code using the unshift() method on the array.
+
 const cafes = [
   { name: "8shots Cafe", location: "Makati", rating: 4.6 },
   { name: "Starbucks", location: "Taguig", rating: 4.8 },
