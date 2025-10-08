@@ -1,0 +1,55 @@
+<!-- We first have an input field asking the user to input a number. 
+Create a Promise that rejects if the inputted value is not between 1 and 10 and resolves by printing the string 
+“Yes <number inputted> is between 1 and 10” on the DOM. If the user fails three times to give a number between 1 and 10, 
+we’ll just print “You already failed three times, so no chances anymore”.  -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Number Between 1 and 10</title>
+</head>
+<body>
+  <h2>Enter a number between 1 and 10</h2>
+  <input type="text" id="numberInput" placeholder="Type a number here">
+  <button onclick="checkNumber()">Submit</button>
+
+  <p id="output"></p>
+
+  <script>
+    let attempts = 0;
+
+    function checkNumber() {
+      const input = document.getElementById('numberInput').value.trim();
+      const output = document.getElementById('output');
+      const num = Number(input);
+
+      const numberPromise = new Promise((resolve, reject) => {
+        if (attempts >= 3) {
+          reject("You already failed three times, so no chances anymore.");
+          return;
+        }
+
+        if (Number.isNaN(num) || num < 1 || num > 10) {
+          attempts++;
+          reject(`Attempt ${attempts}: Please enter a number between 1 and 10.`);
+        } else {
+          resolve(num);
+        }
+      });
+
+      numberPromise
+        .then(validNum => {
+          output.innerText = `Yes ${validNum} is between 1 and 10.`;
+        })
+        .catch(err => {
+          if (attempts >= 3) {
+            output.innerText = "You already failed three times, so no chances anymore.";
+          } else {
+            output.innerText = err;
+          }
+        });
+    }
+  </script>
+</body>
+</html>

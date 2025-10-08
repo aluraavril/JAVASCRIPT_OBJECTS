@@ -1,0 +1,44 @@
+<!-- We first have an input field asking the user to input a number.
+ Create a Promise that rejects if the inputted value is not an integer and
+ resolves with the integer input being squared, printing the string
+ “<number inputted> is <squared number> when doubled ” on the DOM.  -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Square the Number</title>
+</head>
+<body>
+  <h2>Enter a number</h2>
+  <input type="text" id="numberInput" placeholder="Type a number here">
+  <button onclick="processNumber()">Submit</button>
+
+  <p id="output"></p>
+
+  <script>
+    function processNumber() {
+      const input = document.getElementById('numberInput').value.trim();
+      const output = document.getElementById('output');
+
+      const numberPromise = new Promise((resolve, reject) => {
+        const num = Number(input);
+        if (!Number.isInteger(num)) {
+          reject("Please enter a valid integer.");
+        } else {
+          const squared = num * num;
+          resolve({ num, squared });
+        }
+      });
+
+      numberPromise
+        .then(result => {
+          output.innerText = `${result.num} is ${result.squared} when doubled.`;
+        })
+        .catch(err => {
+          output.innerText = err;
+        });
+    }
+  </script>
+</body>
+</html>

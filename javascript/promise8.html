@@ -1,0 +1,47 @@
+<!-- We first have an input field asking the user to input a number.
+ Create a Promise that rejects if the inputted value is not an integer and resolves after 5 seconds
+ with the integer input being cubed, printing the string “<number inputted> is <cubed number> when cubed” on the DOM.  -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cube the Number</title>
+</head>
+<body>
+  <h2>Enter a number</h2>
+  <input type="text" id="numberInput" placeholder="Type a number here">
+  <button onclick="processNumber()">Submit</button>
+
+  <p id="output"></p>
+
+  <script>
+    function processNumber() {
+      const input = document.getElementById('numberInput').value.trim();
+      const output = document.getElementById('output');
+
+      const numberPromise = new Promise((resolve, reject) => {
+        const num = Number(input);
+
+        if (!Number.isInteger(num)) {
+          reject("Please enter a valid integer.");
+        } else {
+          output.innerText = "Processing... please wait 5 seconds";
+          setTimeout(() => {
+            const cubed = num ** 3;
+            resolve({ num, cubed });
+          }, 5000);
+        }
+      });
+
+      numberPromise
+        .then(result => {
+          output.innerText = `${result.num} is ${result.cubed} when cubed.`;
+        })
+        .catch(err => {
+          output.innerText = err;
+        });
+    }
+  </script>
+</body>
+</html>

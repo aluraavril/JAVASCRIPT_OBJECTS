@@ -1,0 +1,41 @@
+<!-- We first have an input field asking for the user’s name.
+ Create a Promise that rejects if that input field is empty, and resolves with the input,
+ greeting the user with “good day, <name of user here>!” on the DOM -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Greeting User</title>
+</head>
+<body>
+  <h2>Enter your name</h2>
+  <input type="text" id="username" placeholder="Type your name here">
+  <button onclick="greetUser()">Submit</button>
+
+  <p id="output"></p>
+
+  <script>
+    function greetUser() {
+      const name = document.getElementById('username').value;
+      const output = document.getElementById('output');
+
+      const namePromise = new Promise((resolve, reject) => {
+        if (!name) {
+          reject("Input field is empty");
+        } else {
+          resolve(name);
+        }
+      });
+
+      namePromise
+        .then(res => {
+          output.innerText = `Good day, ${res}!`;
+        })
+        .catch(err => {
+          output.innerText = err;
+        });
+    }
+  </script>
+</body>
+</html>
